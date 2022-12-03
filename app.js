@@ -31,7 +31,7 @@ function getPokemon(){
         return axios.get(`${baseURL}?limit=${count}`)
     })
     .then(res => {
-        randomPokemon = _.sampleSize(res.data.results, 3)
+        let randomPokemon = _.sampleSize(res.data.results, 3)
         return Promise.all(randomPokemon.map(poke => axios.get(poke.url)))
     })
     .then(pokeArr => {
@@ -64,7 +64,6 @@ function createPokemonCard(obj, desc) {
   </div>
     `
     $("#pokeArea").append(card)
-
 }
 
 function getCard() {
@@ -100,16 +99,15 @@ function partOne() {
             for (let key in resObj) {
                 $("#partOne").append(`<p>${resObj[key]}</p>`)
             }
-            return Promise.all(
-                Array.from({ length: 4 }, () => {
-                    return $.getJSON(`${baseURL}/27?json`);
-                })
+            let arr = [27, 27, 27, 27]
+            return Promise.all(arr.map(num => axios.get(`${baseURL}/${num}?json`))
             )
         })
         .then(res => {
             $("#partOne").append("<hr>")
+            console.log(res)
             for (let fact of res) {
-                $("#partOne").append(`<p>${fact.text}</p>`)
+                $("#partOne").append(`<p>${fact.data.text}</p>`)
             }
         })
 }
@@ -156,7 +154,7 @@ function partThree() {
     })
     .then(res => {
         console.log(res.data)
-        randomPokemon = _.sampleSize(res.data.results, 3)
+        let randomPokemon = _.sampleSize(res.data.results, 3)
         return Promise.all(randomPokemon.map(poke => axios.get(poke.url)))
     })
     .then(pokeArr => {
@@ -171,7 +169,7 @@ function partThree() {
             return axios.get(`${baseURL}?limit=${count}`)
         })
         .then(res => {
-            randomPokemon = _.sampleSize(res.data.results, 3)
+            let randomPokemon = _.sampleSize(res.data.results, 3)
             return Promise.all(randomPokemon.map(poke => axios.get(poke.url)))
         })
         .then(pokeArr => {
