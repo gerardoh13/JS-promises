@@ -1,0 +1,18 @@
+
+body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.cardPic {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+button {
+    min-width: 130px;
+}
